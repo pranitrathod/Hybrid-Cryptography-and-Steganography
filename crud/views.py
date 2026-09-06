@@ -273,3 +273,45 @@ def deleteFiles(request, id):
     file.delete()
     messages.warning(request, 'File was deleted successfully!')
     return redirect('/fileupload')
+@login_required
+def security_workflow(request):
+    """Render a hiring-manager-facing view of the implemented protection pipeline."""
+    stages = [
+        {
+            "number": "01",
+            "title": "Hash the source",
+            "description": "SHA-256 creates an integrity fingerprint before any transformation.",
+            "technology": "SHA-256",
+        },
+        {
+            "number": "02",
+            "title": "Compress the bytes",
+            "description": "The built-in 16-bit LZW codec creates the compact payload to protect.",
+            "technology": "LZW",
+        },
+        {
+            "number": "03",
+            "title": "Derive a session key",
+            "description": "An ephemeral P-256 ECDH exchange and HKDF derive a unique AES-256 key per file.",
+            "technology": "ECC + HKDF",
+        },
+        {
+            "number": "04",
+            "title": "Encrypt and authenticate",
+            "description": "AES-GCM encrypts the compressed file and authenticates the original hash.",
+            "technology": "AES-256-GCM",
+        },
+        {
+            "number": "05",
+            "title": "Conceal in an image",
+            "description": "The versioned encrypted payload is embedded into a lossless PNG using RGB LSBs.",
+            "technology": "PNG LSB",
+        },
+        {
+            "number": "06",
+            "title": "Recover and verify",
+            "description": "Extraction reverses every stage and returns data only after integrity verification.",
+            "technology": "Verified recovery",
+        },
+    ]
+    return render(request, 'security_workflow.html', {'stages': stages})

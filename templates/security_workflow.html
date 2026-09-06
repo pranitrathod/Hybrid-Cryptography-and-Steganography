@@ -1,0 +1,50 @@
+{% extends 'layout/app.html' %}
+
+{% block body %}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Hybrid Security Workflow</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Security Workflow</li>
+    </ol>
+
+    <div class="card border-primary mb-4 shadow-sm">
+        <div class="card-body">
+            <div class="d-flex align-items-center gap-3">
+                <i class="fas fa-shield-halved fa-3x text-primary"></i>
+                <div>
+                    <h2 class="h4 mb-1">Confidential cloud data, protected end to end</h2>
+                    <p class="mb-0 text-muted">A file moves through six explicit, reversible stages before its stego PNG is ready for storage.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        {% for stage in stages %}
+        <div class="col-md-6 col-xl-4">
+            <article class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <span class="badge bg-primary mb-3">Stage {{ stage.number }}</span>
+                    <h2 class="h5">{{ stage.title }}</h2>
+                    <p class="text-muted">{{ stage.description }}</p>
+                    <span class="badge bg-light text-dark border">{{ stage.technology }}</span>
+                </div>
+            </article>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="card mt-4 mb-4">
+        <div class="card-header"><i class="fas fa-code me-1"></i>Implementation evidence</div>
+        <div class="card-body">
+            <p>The pipeline is implemented in <code>crud/services/hybrid_security.py</code> and is deliberately separated from views so the same code can run from an upload handler, background worker, or command-line process.</p>
+            <ul class="mb-0">
+                <li>Per-file AES keys are derived through ephemeral ECDH, rather than stored beside encrypted data.</li>
+                <li>AES-GCM detects encrypted-payload tampering; SHA-256 verifies the recovered original data.</li>
+                <li>Capacity and malformed-payload checks fail safely before data is returned.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
