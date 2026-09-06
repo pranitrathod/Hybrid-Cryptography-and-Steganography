@@ -1,0 +1,12 @@
+# Python bytecode and test artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Java build output
+*.class
+
+# Local environment files can contain database credentials
+.env
+.env.*
+!.env.example
