@@ -13,7 +13,7 @@ This project focuses on enhancing cloud data security using a hybrid approach th
 ## **Technologies Used**  
 - **Programming Language:** Python
 - **Database:** MySQL  
-- **Frameworks & Libraries:** Django for GUI  
+- **Frameworks & Libraries:** Django/Java Desktop for GUI  
 
 ## **System Workflow**  
 1. **User uploads a file** → Encrypted using **AES & ECC**.  
