@@ -49,7 +49,7 @@ This project focuses on enhancing cloud data security using a hybrid approach th
 ```
 
 
-## **Database Connection Examples**
+## **Database Connection**
 Production-oriented MySQL connection utilities are available in [`database/`](database/):
 
 - **Python:** environment-based configuration, TLS enabled by default, a 10-second timeout, and context-managed cleanup.
@@ -58,11 +58,6 @@ Production-oriented MySQL connection utilities are available in [`database/`](da
 See [`database/README.md`](database/README.md) for setup, validation commands, and a concise hiring-manager review of the security and reliability decisions.
 
 The complete cryptographic and steganographic workflow is implemented in [`crud/services/hybrid_security.py`](crud/services/hybrid_security.py): SHA-256 → LZW → ECDH-derived AES-GCM → PNG LSB embedding, with the reverse path verifying integrity before returning plaintext.
-
-## **Future Enhancements**  
-- Implement **multi-user access control**.  
-- Improve **encryption efficiency** with quantum-resistant algorithms.  
-- Support for **additional file formats** (audio, video, etc.).  
 
 ## **Demonstration**
 
